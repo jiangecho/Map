@@ -4,6 +4,14 @@ public class MapPoint {
 	private float x;
 	private float y;
 
+	public MapPoint() {
+	}
+
+	public MapPoint(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public void set(float x, float y) {
 		this.x = x;
 		this.y = y;
