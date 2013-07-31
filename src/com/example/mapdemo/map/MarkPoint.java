@@ -1,13 +1,13 @@
 package com.example.mapdemo.map;
 
-public class MapPoint {
+public class MarkPoint {
 	private float x;
 	private float y;
 
-	public MapPoint() {
+	public MarkPoint() {
 	}
 
-	public MapPoint(float x, float y) {
+	public MarkPoint(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -31,5 +31,9 @@ public class MapPoint {
 
 	public void setY(float y) {
 		this.y = y;
+	}
+
+	public boolean isTouch(float x, float y) {
+		return true;
 	}
 }
