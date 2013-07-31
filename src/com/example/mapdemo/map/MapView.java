@@ -91,13 +91,14 @@ public class MapView extends View {
 
 		mapWidth = viewWidth;
 		mapHeight = (int) MapUtils.CalcNewHeight(mapWidth);
-		mapLeft = 0;
-		mapTop = (int) ((viewHeight - mapHeight) / 2.0f);
+		mapLeft  = 0;
+		mapTop  = (int) ((viewHeight - mapHeight) / 2.0f);
+		last .set(mapLeft, mapTop);
 	}
 
 	public void Draw(Canvas canvas) {
-		canvas.drawBitmap(mapBitmap, null, new Rect(mapLeft, mapTop,
-				mapLeft+(int) mapWidth, mapTop + (int) mapHeight), bmpPaint);
+		canvas.drawBitmap(mapBitmap, null, new Rect(mapLeft, mapTop, mapLeft
+				+ (int) mapWidth, mapTop + (int) mapHeight), bmpPaint);
 	}
 
 	private MapPoint last = new MapPoint();
@@ -110,21 +111,25 @@ public class MapView extends View {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			touchType = TouchType._DRAG;
+			last.set(curX, curY);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			if (touchType == TouchType._DRAG) {
 				// 移动
-				mapLeft += (int) (curX - last.getX());
+				mapLeft += (int) ( curX - last.getX());
 				mapTop += (int) (curY - last.getY());
-				System.out.println(String.format("l = %s  t = %s", mapLeft,
-						mapTop));
+				
+				//检测上边界
+				//检测下边界
+				//检测左边界
+				//检测右边界
 				last.set(curX, curY);
 			}
 
 			break;
 		case MotionEvent.ACTION_UP:
 			touchType = TouchType._NONE;
-			last.set(curX, curY);
+			last.set(mapLeft, mapTop);
 			break;
 		default:
 			break;
