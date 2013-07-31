@@ -77,10 +77,6 @@ public class MapView extends View {
 				new ScaleGestureListener());
 		setFocusable(true);
 		initPaint();
-
-		markPoints.add(new MarkPoint(100, 100));
-		markPoints.add(new MarkPoint(160, 160));
-		markPoints.add(new MarkPoint(428, 170));
 	}
 
 	private Paint bmpPaint;
@@ -116,6 +112,10 @@ public class MapView extends View {
 		mapHeight = MapUtils.CalcNewHeight(mapWidth);
 		mapLeft = 0;
 		mapTop = ((viewHeight - mapHeight) / 2.0f);
+		
+		markPoints.add(new MarkPoint(mContext,100, 100,markBitmap.getWidth(),markBitmap.getHeight()));
+		markPoints.add(new MarkPoint(mContext,160, 160,markBitmap.getWidth(),markBitmap.getHeight()));
+		markPoints.add(new MarkPoint(mContext,428, 170,markBitmap.getWidth(),markBitmap.getHeight(),"藏经楼"));
 
 	}
 
@@ -168,6 +168,10 @@ public class MapView extends View {
 		case MotionEvent.ACTION_UP:
 			touchType = TouchType._NONE;
 			last.set(mapLeft, mapTop);
+			
+			for (int i = 0; i < markPoints.size(); i++) {
+				markPoints.get(i).isTouch(curX, curY,scale,mapLeft,mapTop);
+			}
 			break;
 		default:
 			break;
