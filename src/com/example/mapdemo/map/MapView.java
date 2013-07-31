@@ -18,6 +18,10 @@ import android.view.ScaleGestureDetector;
 import android.view.ScaleGestureDetector.OnScaleGestureListener;
 import android.view.View;
 
+/**
+ * @author gejw
+ *
+ */
 public class MapView extends View {
 	public enum TouchType {
 		_NONE, _DRAG, _ZOOM;
@@ -63,7 +67,7 @@ public class MapView extends View {
 	private float mapLeft;
 	private float mapTop;
 
-	List<MPoint> mapPoints = new ArrayList<MPoint>();
+	List<MarkPoint> markPoints = new ArrayList<MarkPoint>();
 
 	private ScaleGestureDetector mScaleDetector;
 
@@ -74,9 +78,9 @@ public class MapView extends View {
 		setFocusable(true);
 		initPaint();
 
-		mapPoints.add(new MPoint(100, 100));
-		mapPoints.add(new MPoint(160, 160));
-		mapPoints.add(new MPoint(428, 170));
+		markPoints.add(new MarkPoint(100, 100));
+		markPoints.add(new MarkPoint(160, 160));
+		markPoints.add(new MarkPoint(428, 170));
 	}
 
 	private Paint bmpPaint;
@@ -123,11 +127,11 @@ public class MapView extends View {
 	}
 
 	private void drawPoint(Canvas canvas) {
-		for (int i = 0; i < mapPoints.size(); i++) {
+		for (int i = 0; i < markPoints.size(); i++) {
 			// bmpPaint.setColor(Color.RED);
 
-			float x = mapLeft + scale * mapPoints.get(i).getX();
-			float y = mapTop + scale * mapPoints.get(i).getY();
+			float x = mapLeft + scale * markPoints.get(i).getX();
+			float y = mapTop + scale * markPoints.get(i).getY();
 
 			// canvas.drawCircle(x, y, 5, bmpPaint);
 

@@ -1,5 +1,9 @@
 package com.example.mapdemo.map;
 
+/**
+ * @author gejw
+ *
+ */
 public class MapUtils {
 
 	public static float DefaultWidth = 0;
