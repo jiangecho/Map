@@ -43,6 +43,8 @@ public class MapView extends View {
 	private Context mContext;
 	// 地图的bmp
 	private Bitmap mapBitmap;
+	// 标记的bmp
+	private Bitmap markBitmap;
 	// 当前的缩放比例
 	private float scale = 1.0f;
 	// 最小的缩放比例
@@ -60,7 +62,7 @@ public class MapView extends View {
 
 	private int mapLeft;
 	private int mapTop;
-	
+
 	List<MapPoint> mapPoints = new ArrayList<MapPoint>();
 
 	private ScaleGestureDetector mScaleDetector;
@@ -71,10 +73,10 @@ public class MapView extends View {
 				new ScaleGestureListener());
 		setFocusable(true);
 		initPaint();
-		
-		mapPoints.add(new MapPoint(100,100));
-		mapPoints.add(new MapPoint(150,150));
-		mapPoints.add(new MapPoint(200,200));
+
+		mapPoints.add(new MapPoint(100, 100));
+		mapPoints.add(new MapPoint(150, 150));
+		mapPoints.add(new MapPoint(200, 200));
 	}
 
 	private Paint bmpPaint;
@@ -90,6 +92,8 @@ public class MapView extends View {
 		try {
 			mapBitmap = BitmapFactory.decodeStream(mContext.getAssets().open(
 					"map.png"));
+			markBitmap = BitmapFactory.decodeStream(mContext.getAssets().open(
+					"mark.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +105,7 @@ public class MapView extends View {
 
 		float ScaleW = viewWidth / MapUtils.DefaultWidth;
 		float ScaleH = viewHeight / MapUtils.DefaultHeight;
-		minScale =scale= ScaleW > ScaleH ? ScaleH : ScaleW;
+		minScale = scale = ScaleW > ScaleH ? ScaleH : ScaleW;
 		maxScale = minScale * 4.0f;
 
 		mapWidth = viewWidth;
@@ -115,11 +119,16 @@ public class MapView extends View {
 				+ (int) mapWidth, mapTop + (int) mapHeight), bmpPaint);
 		drawPoint(canvas);
 	}
-	
+
 	private void drawPoint(Canvas canvas) {
 		for (int i = 0; i < mapPoints.size(); i++) {
-			bmpPaint.setColor(Color.RED);
-			canvas.drawCircle(mapLeft +scale* mapPoints.get(i).getX(),mapTop+ scale*mapPoints.get(i).getY(), 20, bmpPaint);
+//			bmpPaint.setColor(Color.RED);
+//			canvas.drawCircle(mapLeft + scale * mapPoints.get(i).getX(), mapTop
+//					+ scale * mapPoints.get(i).getY(), 20, bmpPaint);
+
+			 float x = mapLeft + scale * mapPoints.get(i).getX();
+			 float y = mapTop + scale * mapPoints.get(i).getY();
+			 canvas.drawBitmap(markBitmap, x, y, bmpPaint);
 		}
 	}
 
@@ -181,6 +190,7 @@ public class MapView extends View {
 			ScaleGestureDetector.SimpleOnScaleGestureListener {
 
 		MapPoint last = new MapPoint();
+		float lastScale = 0;
 
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
@@ -193,12 +203,16 @@ public class MapView extends View {
 
 			mapWidth = MapUtils.DefaultWidth * scale;
 			mapHeight = MapUtils.DefaultHeight * scale;
+			if(lastScale ==scale)
+				return true;
 
 			mapLeft = (int) (detector.getFocusX() - detector.getScaleFactor()
 					* (detector.getFocusX() - mapLeft));
 			mapTop = (int) (detector.getFocusY() - detector.getScaleFactor()
 					* (detector.getFocusY() - mapTop));
 			checkRounds();
+			
+			lastScale = scale;
 			return true;
 		}
 
