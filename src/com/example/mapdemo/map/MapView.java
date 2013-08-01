@@ -1,13 +1,10 @@
 package com.example.mapdemo.map;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.color;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,7 +12,6 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-import android.view.ScaleGestureDetector.OnScaleGestureListener;
 import android.view.View;
 
 /**
@@ -136,6 +132,7 @@ public class MapView extends View {
 			canvas.drawBitmap(markBitmap, x, y, bmpPaint);
 		}
 	}
+
 
 	private MPoint last = new MPoint();
 
