@@ -41,7 +41,7 @@ public class MapView extends View {
 		super(context);
 		init(context);
 	}
-	
+
 	private Context mContext;
 	// 触摸类型
 	private TouchType touchType = TouchType._NONE;
@@ -69,8 +69,10 @@ public class MapView extends View {
 	private float mapTop;
 	// 地图mark集
 	private List<MapMark> mapMarks = new ArrayList<MapMark>();
-	//标记是否进行过初始化计算
+	// 标记是否进行过初始化计算
 	private boolean isCalc = false;
+	// 标记事件
+	private MapMarkClickListenrer mapMarkClickListenrer;
 
 	private ScaleGestureDetector mScaleDetector;
 
@@ -93,7 +95,7 @@ public class MapView extends View {
 	 * 初始化计算
 	 */
 	private void createCalc() {
-		if(isCalc)
+		if (isCalc)
 			return;
 		MapUtils.DefaultWidth = mapBitmap.getWidth();
 		MapUtils.DefaultHeight = mapBitmap.getHeight();
@@ -165,7 +167,9 @@ public class MapView extends View {
 
 			for (int i = 0; i < mapMarks.size(); i++) {
 				if (mapMarks.get(i).isTouch(curX, curY, scale, mapLeft, mapTop)) {
-
+					if (mapMarkClickListenrer != null)
+						mapMarkClickListenrer.MapMarkClick(mapMarks.get(i)
+								.getTitle());
 				}
 			}
 			break;
@@ -264,6 +268,15 @@ public class MapView extends View {
 
 	public void setMapMarks(List<MapMark> mapMarks) {
 		this.mapMarks = mapMarks;
+	}
+
+	public MapMarkClickListenrer getMapMarkClickListenrer() {
+		return mapMarkClickListenrer;
+	}
+
+	public void setMapMarkClickListenrer(
+			MapMarkClickListenrer mapMarkClickListenrer) {
+		this.mapMarkClickListenrer = mapMarkClickListenrer;
 	}
 
 }

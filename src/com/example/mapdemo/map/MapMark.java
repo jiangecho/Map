@@ -102,7 +102,6 @@ public class MapMark {
 		touchY = (touchY - mapTop) / scale;
 		if (touchX > x - width / 2 && touchX < x + width / 2
 				&& touchY > y - height && touchY <= y) {
-			Toast.makeText(mContext, title, Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
