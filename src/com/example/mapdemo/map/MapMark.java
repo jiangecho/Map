@@ -19,12 +19,24 @@ public class MapMark {
 	public MapMark() {
 	}
 
+	/**
+	 * @param context
+	 * @param x
+	 * @param y
+	 */
 	public MapMark(Context context, float x, float y) {
 		this.mContext = context;
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * @param context
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public MapMark(Context context, float x, float y, float width,
 			float height) {
 		this.mContext = context;
@@ -34,6 +46,14 @@ public class MapMark {
 		this.height = height;
 	}
 
+	/**
+	 * @param context
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param title
+	 */
 	public MapMark(Context context, float x, float y, float width,
 			float height, String title) {
 		this.mContext = context;
@@ -44,6 +64,10 @@ public class MapMark {
 		this.title = title;
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public void set(float x, float y) {
 		this.x = x;
 		this.y = y;
