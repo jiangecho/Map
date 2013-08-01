@@ -3,7 +3,12 @@ package com.example.mapdemo.map;
 import android.content.Context;
 import android.widget.Toast;
 
-public class MarkPoint {
+/**
+ * 地图标记类
+ * @author gejw
+ *
+ */
+public class MapMark {
 	private Context mContext;
 	private float x;
 	private float y;
@@ -11,16 +16,16 @@ public class MarkPoint {
 	private float height;
 	private String title;
 
-	public MarkPoint() {
+	public MapMark() {
 	}
 
-	public MarkPoint(Context context, float x, float y) {
+	public MapMark(Context context, float x, float y) {
 		this.mContext = context;
 		this.x = x;
 		this.y = y;
 	}
 
-	public MarkPoint(Context context, float x, float y, float width,
+	public MapMark(Context context, float x, float y, float width,
 			float height) {
 		this.mContext = context;
 		this.x = x;
@@ -29,7 +34,7 @@ public class MarkPoint {
 		this.height = height;
 	}
 
-	public MarkPoint(Context context, float x, float y, float width,
+	public MapMark(Context context, float x, float y, float width,
 			float height, String title) {
 		this.mContext = context;
 		this.x = x;

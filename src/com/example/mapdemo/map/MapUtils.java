@@ -1,6 +1,7 @@
 package com.example.mapdemo.map;
 
 /**
+ * 用于缩放计算处理
  * @author gejw
  *
  */

@@ -1,5 +1,10 @@
 package com.example.mapdemo.map;
 
+/**
+ * 坐标点
+ * @author gejw
+ *
+ */
 public class MPoint {
 	private float x;
 	private float y;

@@ -20,7 +20,7 @@ import android.view.View;
 
 /**
  * @author gejw
- *
+ * 
  */
 public class MapView extends View {
 	public enum TouchType {
@@ -41,10 +41,10 @@ public class MapView extends View {
 		super(context);
 		init(context);
 	}
-
+	
+	private Context mContext;
 	// 触摸类型
 	private TouchType touchType = TouchType._NONE;
-	private Context mContext;
 	// 地图的bmp
 	private Bitmap mapBitmap;
 	// 标记的bmp
@@ -63,11 +63,14 @@ public class MapView extends View {
 	private float mapWidth;
 	// 地图bmp高度
 	private float mapHeight;
-
+	// 地图bmp的左上角坐标x
 	private float mapLeft;
+	// 地图bmp的左上角坐标y
 	private float mapTop;
-
-	List<MarkPoint> markPoints = new ArrayList<MarkPoint>();
+	// 地图mark集
+	private List<MapMark> mapMarks = new ArrayList<MapMark>();
+	//标记是否进行过初始化计算
+	private boolean isCalc = false;
 
 	private ScaleGestureDetector mScaleDetector;
 
@@ -86,18 +89,12 @@ public class MapView extends View {
 		bmpPaint.setAntiAlias(true);
 	}
 
-	private void initBitmap() {
-		if (mapBitmap != null)
+	/**
+	 * 初始化计算
+	 */
+	private void createCalc() {
+		if(isCalc)
 			return;
-		try {
-			mapBitmap = BitmapFactory.decodeStream(mContext.getAssets().open(
-					"map.png"));
-			markBitmap = BitmapFactory.decodeStream(mContext.getAssets().open(
-					"mark.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		MapUtils.DefaultWidth = mapBitmap.getWidth();
 		MapUtils.DefaultHeight = mapBitmap.getHeight();
 		viewWidth = getWidth();
@@ -112,11 +109,8 @@ public class MapView extends View {
 		mapHeight = MapUtils.CalcNewHeight(mapWidth);
 		mapLeft = 0;
 		mapTop = ((viewHeight - mapHeight) / 2.0f);
-		
-		markPoints.add(new MarkPoint(mContext,100, 100,markBitmap.getWidth(),markBitmap.getHeight()));
-		markPoints.add(new MarkPoint(mContext,160, 160,markBitmap.getWidth(),markBitmap.getHeight()));
-		markPoints.add(new MarkPoint(mContext,428, 170,markBitmap.getWidth(),markBitmap.getHeight(),"藏经楼"));
 
+		isCalc = true;
 	}
 
 	public void Draw(Canvas canvas) {
@@ -127,11 +121,11 @@ public class MapView extends View {
 	}
 
 	private void drawPoint(Canvas canvas) {
-		for (int i = 0; i < markPoints.size(); i++) {
+		for (int i = 0; i < mapMarks.size(); i++) {
 			// bmpPaint.setColor(Color.RED);
 
-			float x = mapLeft + scale * markPoints.get(i).getX();
-			float y = mapTop + scale * markPoints.get(i).getY();
+			float x = mapLeft + scale * mapMarks.get(i).getX();
+			float y = mapTop + scale * mapMarks.get(i).getY();
 
 			// canvas.drawCircle(x, y, 5, bmpPaint);
 
@@ -168,9 +162,11 @@ public class MapView extends View {
 		case MotionEvent.ACTION_UP:
 			touchType = TouchType._NONE;
 			last.set(mapLeft, mapTop);
-			
-			for (int i = 0; i < markPoints.size(); i++) {
-				markPoints.get(i).isTouch(curX, curY,scale,mapLeft,mapTop);
+
+			for (int i = 0; i < mapMarks.size(); i++) {
+				if (mapMarks.get(i).isTouch(curX, curY, scale, mapLeft, mapTop)) {
+
+				}
 			}
 			break;
 		default:
@@ -241,8 +237,33 @@ public class MapView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		canvas.drawColor(Color.parseColor("#DDE4E7"));
-		initBitmap();
+		createCalc();
 		Draw(canvas);
+	}
+
+	public Bitmap getMapBitmap() {
+		return mapBitmap;
+	}
+
+	public void setMapBitmap(Bitmap mapBitmap) {
+		this.mapBitmap = mapBitmap;
+		isCalc = false;
+	}
+
+	public Bitmap getMarkBitmap() {
+		return markBitmap;
+	}
+
+	public void setMarkBitmap(Bitmap markBitmap) {
+		this.markBitmap = markBitmap;
+	}
+
+	public List<MapMark> getMapMarks() {
+		return mapMarks;
+	}
+
+	public void setMapMarks(List<MapMark> mapMarks) {
+		this.mapMarks = mapMarks;
 	}
 
 }
