@@ -26,8 +26,6 @@ public class MainActivity extends Activity {
 					"map.png"));
 			Bitmap markBitmap = BitmapFactory.decodeStream(getAssets().open(
 					"mark.png"));
-			Bitmap compassBitmap = BitmapFactory.decodeStream(getAssets().open(
-					"compass.png"));
 
 			mapMarks.add(new MapMark(this, 100, 100, markBitmap.getWidth(),
 					markBitmap.getHeight()));
