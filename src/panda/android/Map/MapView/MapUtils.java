@@ -1,4 +1,4 @@
-package com.example.mapdemo.map;
+package panda.android.Map.MapView;
 
 /**
  * 用于缩放计算处理

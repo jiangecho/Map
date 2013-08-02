@@ -1,8 +1,12 @@
-package com.example.mapdemo;
+package panda.android.Map;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import panda.android.Map.MapView.MapMark;
+import panda.android.Map.MapView.MapMarkClickListenrer;
+import panda.android.Map.MapView.MapView;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -10,9 +14,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.mapdemo.map.MapMark;
-import com.example.mapdemo.map.MapMarkClickListenrer;
-import com.example.mapdemo.map.MapView;
 
 public class MainActivity extends Activity {
 

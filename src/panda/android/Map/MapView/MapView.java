@@ -1,4 +1,4 @@
-package com.example.mapdemo.map;
+package panda.android.Map.MapView;
 
 import java.util.ArrayList;
 import java.util.List;

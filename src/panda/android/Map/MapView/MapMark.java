@@ -1,4 +1,4 @@
-package com.example.mapdemo.map;
+package panda.android.Map.MapView;
 
 import android.content.Context;
 import android.widget.Toast;

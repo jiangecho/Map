@@ -1,4 +1,4 @@
-package com.example.mapdemo.map;
+package panda.android.Map.MapView;
 
 public interface MapMarkClickListenrer {
 
