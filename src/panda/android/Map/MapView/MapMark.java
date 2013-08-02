@@ -8,10 +8,8 @@ import android.widget.Toast;
  * @author gejw
  *
  */
-public class MapMark {
+public class MapMark extends MPoint{
 	private Context mContext;
-	private float x;
-	private float y;
 	private float width;
 	private float height;
 	private String title;
@@ -64,30 +62,6 @@ public class MapMark {
 		this.title = title;
 	}
 
-	/**
-	 * @param x
-	 * @param y
-	 */
-	public void set(float x, float y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	public float getX() {
-		return x;
-	}
-
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	public float getY() {
-		return y;
-	}
-
-	public void setY(float y) {
-		this.y = y;
-	}
 
 	/**
 	 * 判断是否点击到了

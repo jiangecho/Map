@@ -6,8 +6,8 @@ package panda.android.Map.MapView;
  *
  */
 public class MPoint {
-	private float x;
-	private float y;
+	protected float x;
+	protected float y;
 
 	public MPoint() {
 	}
