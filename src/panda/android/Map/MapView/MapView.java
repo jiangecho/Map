@@ -133,7 +133,6 @@ public class MapView extends View {
 		}
 	}
 
-
 	private MPoint last = new MPoint();
 
 	@Override
@@ -165,8 +164,7 @@ public class MapView extends View {
 			for (int i = 0; i < mapMarks.size(); i++) {
 				if (mapMarks.get(i).isTouch(curX, curY, scale, mapLeft, mapTop)) {
 					if (mapMarkClickListenrer != null)
-						mapMarkClickListenrer.MapMarkClick(mapMarks.get(i)
-								.getTitle());
+						mapMarkClickListenrer.MapMarkClick(mapMarks.get(i));
 				}
 			}
 			break;

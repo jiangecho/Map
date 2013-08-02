@@ -14,26 +14,29 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Toast;
 
-
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MapView mapView = new MapView(this);
-		List<MapMark> mapMarks = new ArrayList<MapMark>();
+		
 		try {
+			MapView mapView = new MapView(this);
+			List<MapMark> mapMarks = new ArrayList<MapMark>();
+			
 			Bitmap mapBitmap = BitmapFactory.decodeStream(getAssets().open(
 					"map.png"));
 			Bitmap markBitmap = BitmapFactory.decodeStream(getAssets().open(
 					"mark.png"));
 
+			// 添加坐标点
 			mapMarks.add(new MapMark(this, 100, 100, markBitmap.getWidth(),
 					markBitmap.getHeight()));
 			mapMarks.add(new MapMark(this, 160, 160, markBitmap.getWidth(),
 					markBitmap.getHeight()));
 			mapMarks.add(new MapMark(this, 428, 170, markBitmap.getWidth(),
 					markBitmap.getHeight(), "藏经楼"));
+			
 			// 加载标记坐标集
 			mapView.setMapMarks(mapMarks);
 			// 加载地图bmp
@@ -44,8 +47,9 @@ public class MainActivity extends Activity {
 			mapView.setMapMarkClickListenrer(new MapMarkClickListenrer() {
 
 				@Override
-				public void MapMarkClick(String str) {
-					Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG)
+				public void MapMarkClick(MapMark mark) {
+					//返回的为坐标信息
+					Toast.makeText(MainActivity.this, mark.getTitle(), Toast.LENGTH_LONG)
 							.show();
 				}
 			});
