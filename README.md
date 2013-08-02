@@ -1,7 +1,8 @@
 模仿景点通的一个导航地图功能   可以点击地图某点  实现跳转
 
 使用：
-    MapView mapView = new MapView(this);
+    		
+    		MapView mapView = new MapView(this);
     		List<MapMark> mapMarks = new ArrayList<MapMark>();
 			
 			Bitmap mapBitmap = BitmapFactory.decodeStream(getAssets().open(
@@ -9,7 +10,7 @@
 			Bitmap markBitmap = BitmapFactory.decodeStream(getAssets().open(
 					"mark.png"));
 
-			// 添加坐标点
+			// 添加坐标点 (坐标点原则：根据地图的原始大小，对应的坐标  代码会自动适配)
 			mapMarks.add(new MapMark(this, 100, 100, markBitmap.getWidth(),
 					markBitmap.getHeight()));
 			mapMarks.add(new MapMark(this, 160, 160, markBitmap.getWidth(),
