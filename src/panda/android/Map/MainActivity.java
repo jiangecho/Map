@@ -30,10 +30,10 @@ public class MainActivity extends Activity {
 					"mark.png"));
 
 			// 添加坐标点
-			mapMarks.add(new MapMark(this, 100, 100, markBitmap.getWidth(),
-					markBitmap.getHeight()));
-			mapMarks.add(new MapMark(this, 160, 160, markBitmap.getWidth(),
-					markBitmap.getHeight()));
+			mapMarks.add(new MapMark(this, 158, 197, markBitmap.getWidth(),
+					markBitmap.getHeight(),"云栖塔院"));
+			mapMarks.add(new MapMark(this, 314, 234, markBitmap.getWidth(),
+					markBitmap.getHeight(),"玉佛楼"));
 			mapMarks.add(new MapMark(this, 428, 170, markBitmap.getWidth(),
 					markBitmap.getHeight(), "藏经楼"));
 			
